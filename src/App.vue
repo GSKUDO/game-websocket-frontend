@@ -1,32 +1,92 @@
 <script setup>
-import HelloWorld from "./components/HelloWorld.vue";
 </script>
 
 <template>
   <div id="app">
-    <header>
-      <img
-        alt="Vue logo"
-        class="logo"
-        src="@/assets/logo.svg"
-        width="125"
-        height="125"
-      />
+  <div id="loginForm">
+    <input type="text" id="username-input">
+    <button id="sendUsername" @click="login()">OK!</button>
 
-      <div class="wrapper">
-        <HelloWorld msg="You did it!" />
-
-        <nav>
-          <router-link to="/">Home</router-link>
-          <router-link to="/about">About</router-link>
-        </nav>
-      </div>
-    </header>
-
+  </div>
+  <div id="rooms" style="display: none">
+  </div>
     <router-view />
   </div>
 </template>
 
+<script>
+  import {v4 as uuidv4} from "uuid";
+  const ws = new WebSocket('ws://localhost:8080')
+
+  ws.onopen = function() {
+    console.log('conexão aberta')
+    // if (localStorage.getItem('browserSession')) {
+    //   logged()
+    // }
+  }
+
+  ws.onmessage = (msg) => {
+    msg = JSON.parse(msg.data)
+    if (msg.browserSession !== localStorage.getItem('browserSession')) {
+      return
+    }
+
+    switch (msg.type) {
+      case 'login':
+        localStorage.setItem('userId', msg.data.userId)
+        logged()
+      case 'getRoomList':
+        console.log(msg.data)
+        msg.data.forEach((item) => {
+          document.getElementById('rooms').innerHTML += `
+          <div>
+            <p>${item.roomName}</p>
+            <p>${item.creatorName}</p>
+            <p>${item.players.length}</p>
+          </div>
+          `
+        })
+    }
+  }
+  
+  const getRoomList = () => {
+    const msg = {
+      type: "getRoomList",
+      browserSession: localStorage.getItem('browserSession')
+    }
+    ws.send(
+      JSON.stringify(msg)
+    )
+  }
+
+  const logged = () => {
+    document.getElementById('loginForm').style.display = 'none';
+    document.getElementById('rooms').style.display = 'block';
+    getRoomList()
+  }
+
+  const login = () => {
+    const username = document.getElementById('username-input').value
+    const browserSession = uuidv4()
+    if (username.length < 4) {
+      alert("Username need to be at least 4 characters")
+      return;
+    }
+
+    document.getElementById('sendUsername').disabled = true
+
+    const msg = {
+      type: 'login',
+      data:{
+        name: username,
+        browserSession
+      }
+    }
+    
+    localStorage.setItem('browserSession', browserSession)  
+    ws.send(JSON.stringify(msg))
+  }
+</script>
 <style scoped>
 header {
   line-height: 1.5;
