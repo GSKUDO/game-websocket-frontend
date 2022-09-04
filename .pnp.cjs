@@ -42,6 +42,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["eslint-plugin-vue", "virtual:d11afcfdf30fcd15a8751b9bd883d619797ffc653c01b02fedf6dfcf432fd39e7a0ce9fada2ae004b94cc17da4b204ff42c2ba4440dde2fff3058af283bdfd28#npm:9.4.0"],\
             ["prettier", "npm:2.7.1"],\
             ["terser", "npm:5.15.0"],\
+            ["uuid", "npm:8.3.2"],\
             ["vite", "virtual:d11afcfdf30fcd15a8751b9bd883d619797ffc653c01b02fedf6dfcf432fd39e7a0ce9fada2ae004b94cc17da4b204ff42c2ba4440dde2fff3058af283bdfd28#npm:3.0.9"],\
             ["vue", "npm:2.7.10"],\
             ["vue-router", "npm:3.6.4"]\
@@ -2272,6 +2273,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["eslint-plugin-vue", "virtual:d11afcfdf30fcd15a8751b9bd883d619797ffc653c01b02fedf6dfcf432fd39e7a0ce9fada2ae004b94cc17da4b204ff42c2ba4440dde2fff3058af283bdfd28#npm:9.4.0"],\
             ["prettier", "npm:2.7.1"],\
             ["terser", "npm:5.15.0"],\
+            ["uuid", "npm:8.3.2"],\
             ["vite", "virtual:d11afcfdf30fcd15a8751b9bd883d619797ffc653c01b02fedf6dfcf432fd39e7a0ce9fada2ae004b94cc17da4b204ff42c2ba4440dde2fff3058af283bdfd28#npm:3.0.9"],\
             ["vue", "npm:2.7.10"],\
             ["vue-router", "npm:3.6.4"]\
@@ -3734,6 +3736,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/util-deprecate-npm-1.0.2-e3fe1a219c-474acf1146.zip/node_modules/util-deprecate/",\
           "packageDependencies": [\
             ["util-deprecate", "npm:1.0.2"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["uuid", [\
+        ["npm:8.3.2", {\
+          "packageLocation": "./.yarn/cache/uuid-npm-8.3.2-eca0baba53-5575a8a75c.zip/node_modules/uuid/",\
+          "packageDependencies": [\
+            ["uuid", "npm:8.3.2"]\
           ],\
           "linkType": "HARD"\
         }]\
